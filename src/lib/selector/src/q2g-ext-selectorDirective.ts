@@ -365,7 +365,7 @@ class SelectionsController implements ng.IController {
         this.menuListValues.push({
             type: "",
             isVisible: true,
-            isEnabled: true,
+            isEnabled: false,
             icon: "clear-selections",
             name: "clear",
             hasSeparator: false
@@ -794,6 +794,10 @@ class SelectionsController implements ng.IController {
         this.useReadebility = properties.useAccessibility;
 
     }
+
+    callbackMainMenuButton(data: string) {
+        console.log(data);
+    }
 }
 
 export function SelectionsDirectiveFactory(rootNameSpace: string): ng.IDirectiveFactory {
@@ -810,14 +814,14 @@ export function SelectionsDirectiveFactory(rootNameSpace: string): ng.IDirective
                 engineroot: "<"
             },
             compile: ():void => {
-                utils.checkDirectiveIsRegistrated($injector, $registrationProvider, rootNameSpace, ListViewDirectiveFactory(rootNameSpace),
-                    "Listview");
-                utils.checkDirectiveIsRegistrated($injector, $registrationProvider, rootNameSpace, ScrollBarDirectiveFactory(rootNameSpace),
-                    "ScrollBar");
+                utils.checkDirectiveIsRegistrated($injector, $registrationProvider, rootNameSpace,
+                    ListViewDirectiveFactory(rootNameSpace), "Listview");
+                utils.checkDirectiveIsRegistrated($injector, $registrationProvider, rootNameSpace,
+                    ScrollBarDirectiveFactory(rootNameSpace), "ScrollBar");
                 utils.checkDirectiveIsRegistrated($injector, $registrationProvider, rootNameSpace,
                     StatusTextDirectiveFactory(rootNameSpace),"StatusText");
-                utils.checkDirectiveIsRegistrated($injector, $registrationProvider, rootNameSpace, ShortCutDirectiveFactory(rootNameSpace),
-                    "Shortcut");
+                utils.checkDirectiveIsRegistrated($injector, $registrationProvider, rootNameSpace,
+                    ShortCutDirectiveFactory(rootNameSpace), "Shortcut");
                 utils.checkDirectiveIsRegistrated($injector, $registrationProvider, rootNameSpace,
                     IdentifierDirectiveFactory(rootNameSpace), "AkquinetIdentifier");
                 utils.checkDirectiveIsRegistrated($injector, $registrationProvider, rootNameSpace,
