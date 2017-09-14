@@ -44,7 +44,7 @@
 
         /**
          * Log a Message with a certain loglevel to the browser console if the global filter allows that seetin
-         * 
+         *
          * @param loglevel the minimum loglevelt (e.g. trace, debug, info, warn, error, fatal, off)
          * @param text the message text
          * @param obj a object to log to the console
@@ -64,13 +64,13 @@
                 var message: string = "Log (" + loglevel.toString() + "): " + this.logclass + " - " + text + " - ";
                 switch (loglevel) {
                     case LogLevel.trace:
-                        console.trace(message, arrObj);
+                        console.log(message, arrObj);
                         break;
                     case LogLevel.debug:
-                        console.debug(message, arrObj);
+                        console.log(message, arrObj);
                         break;
                     case LogLevel.info:
-                        console.info(message, arrObj);
+                        console.log(message, arrObj);
                         break;
                     case LogLevel.warn:
                         console.warn(message, arrObj);
@@ -82,9 +82,9 @@
                         console.error(message, arrObj);
                         break;
                     default:
-                        console.trace(message, arrObj);
+                        console.log(message, arrObj);
                 }
-            };
+            }
         }
 
         trace(text: string, ...arrObj: any[]): void {
