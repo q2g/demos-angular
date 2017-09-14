@@ -8,6 +8,8 @@ import * as customMixin from "./customMixin";
 
 const q2g_ext_selectorDirective = require("./lib/selector/src/q2g-ext-selectorDirective");
 
+import * as registration from "./lib/selector/src/lib/daVinci.js/src/services/registration";
+
 // let enigmaMixin = require("./node_modules/halyard.js/dist/halyard-enigma-mixin.js");
 let qixSchema = require("./node_modules/enigma.js/schemas/12.20.0.json");
 
@@ -32,8 +34,6 @@ app.config(function (
 app.service("$registrationProvider", function () {
     return providerClass;
 });
-
-
 
 class RootCtrl {
 
@@ -105,9 +105,8 @@ class RootCtrl {
 		}
 	};
 	public engineRoot: any;
-	public test: string = "Hallo";
 	public loadToggle: boolean = true;
-
+	public sum: string = "0";
 
 	static $inject = ["$timeout"];
 
@@ -192,19 +191,13 @@ class RootCtrl {
 				return this.app.createSessionObject(this.configObject);
 			}).then((object: EngineAPI.IGenericObject) => {
 				this.engineRoot = object;
+				object.on("changed", () => {
+					this.calcData();
+				});
 				return object.getLayout();
 			}).then((res) => {
 				this.loadToggle = false;
 			});
-
-			// .then(() => {
-			// 	console.log("app", this.app);
-
-			// 	return this.app.evaluate("sum(Title)");
-			// }).then((res) => {
-			// console.log(res);
-
-			// });
 	}
 
 	public setGlobalScrollFalse() {
@@ -213,6 +206,14 @@ class RootCtrl {
 
 	public setGlobalScrollTrue() {
 		$("body").css("overflow", "auto");
+	}
+
+	public calcData() {
+		this.app.evaluate("count([Object ID])")
+			.then((res) => {
+				console.log(res);
+				this.sum = res;
+			});
 	}
 }
 
