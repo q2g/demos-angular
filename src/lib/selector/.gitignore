@@ -1,6 +1,7 @@
 ## Typescript q2g
 *.map
 *.js
+*.css
 
 node_modules/
 
